@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💗 Ruang Rahasia Cinta 💗</title>
   <style>
     body {
@@ -11,34 +12,37 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
+      padding: 20px;
       text-align: center;
     }
 
     h1 {
       color: #ff3399;
-      font-size: 28px;
-      margin-bottom: 20px;
+      font-size: 6vw;
+      margin-bottom: 30px;
       text-shadow: 1px 1px #fff;
     }
 
     .card {
       background-color: #fff0f5;
-      padding: 30px;
-      border-radius: 20px;
+      padding: 40px 30px;
+      border-radius: 25px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
     }
 
     input {
-      padding: 10px 15px;
-      font-size: 16px;
+      padding: 16px 20px;
+      font-size: 5vw;
       border: 2px solid #ffb3d9;
-      border-radius: 20px;
+      border-radius: 30px;
       outline: none;
-      width: 250px;
-      margin-bottom: 15px;
-      transition: 0.3s;
+      width: 100%;
+      margin-bottom: 20px;
+      box-sizing: border-box;
     }
 
     input:focus {
@@ -46,14 +50,15 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 18px;
+      padding: 16px 24px;
+      font-size: 5vw;
       background-color: #ff66b2;
       color: white;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
       transition: 0.3s;
+      width: 100%;
     }
 
     button:hover {
@@ -61,8 +66,9 @@
     }
 
     .emoji {
-      font-size: 40px;
+      font-size: 10vw;
       animation: floating 2s infinite ease-in-out;
+      margin-bottom: 10px;
     }
 
     @keyframes floating {
@@ -73,23 +79,22 @@
 </head>
 <body>
   <div class="emoji">🔐💖</div>
-  <h1>Cuma kamu yang bisa masuk~ 😚</h1>
+  <h1>Masukin kata sayang~ 😚</h1>
   <div class="card">
-    <input type="password" id="password" placeholder="Passwordnya apa, hmm? 🤭">
-    <br>
+    <input type="password" id="password" placeholder="Kata sayangnya apa ya? 🤭">
     <button onclick="cekPassword()">Buka Rahasia 💞</button>
   </div>
 
   <script>
     function cekPassword() {
       const input = document.getElementById('password').value;
-      const passwordBener = "sayangbanget"; // Ganti sesuai password yang kamu mau
-      const linkRahasia = "https://contoh.com/rahasia"; // Ganti ke link tujuan kamu
+      const passwordBener = "sayangbanget";
+      const linkRahasia = "https://contoh.com/rahasia";
 
       if (input === passwordBener) {
         window.location.href = linkRahasia;
       } else {
-        alert("Aduh salah~ 😖💕 Coba lagi ya sayang 🤭");
+        alert("Hmm~ salah sayang 😖💕 coba lagi yaa~ 🤭");
       }
     }
   </script>
