@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlock Link Cinta 🥺💕</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(#e0ffff, #f0fff0);
+      text-align: center;
+      padding: 50px;
+    }
+    input, button {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin: 10px;
+    }
+    button {
+      background-color: #00bfff;
+      color: white;
+    }
+    button:hover {
+      background-color: #1e90ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Masukin password sayang~ 🔐💕</h1>
+  <input type="password" id="passInput" placeholder="Password-nya apa ya? 😖💕">
+  <br>
+  <button onclick="unlock()">🔓 Buka Link</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const targetURL = params.get("url");
+    const expectedKey = params.get("key");
+
+    function unlock() {
+      const input = document.getElementById("passInput").value.trim();
+      if (input === expectedKey) {
+        window.location.href = decodeURIComponent(targetURL);
+      } else {
+        alert("Password-nya salah sayang 😢 peluk Cici dulu~ 🤭💕");
+      }
+    }
+  </script>
+</body>
+</html>
