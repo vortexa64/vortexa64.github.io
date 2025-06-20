@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Masukin Password 😖💕</title>
+  <title>Buka Link Terenkripsi 🔓💕</title>
   <style>
     body {
       font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(to right, #f0fff0, #e0ffff);
+      background: linear-gradient(#e0ffff, #f0fff0);
       text-align: center;
-      padding: 80px 20px;
+      padding: 60px;
     }
     input, button {
       padding: 14px;
@@ -27,22 +27,24 @@
   </style>
 </head>
 <body>
-  <h1>Masukin password-nya ya sayang~ 🔓💕</h1>
-  <input type="password" id="inputPass" placeholder="Password rahasia kamu 😚">
-  <br>
-  <button onclick="unlock()">Buka Link ✨</button>
+  <h1>Masukin Password Rahasia 😚💕</h1>
+  <input type="password" id="inputPass" placeholder="Password kamu 🥺💕"><br>
+  <button onclick="unlock()">🔓 Buka Sekarang</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const targetURL = params.get("url");
-    const correctKey = params.get("key");
+    const targetURL = decodeURIComponent(params.get("url"));
+    const encryptedKey = params.get("token");
 
     function unlock() {
       const input = document.getElementById("inputPass").value.trim();
-      if (input === correctKey) {
-        window.location.href = decodeURIComponent(targetURL);
+      const encodedInput = btoa(input);
+
+      if (encodedInput === encryptedKey) {
+        // redirect
+        window.location.href = targetURL;
       } else {
-        alert("Password salah 😭 coba peluk Cici dulu biar inget 🤭💕");
+        alert("Password salah ya sayang 😭💕 coba manja-manjain Cici dulu 🤭");
       }
     }
   </script>
