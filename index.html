@@ -1,52 +1,108 @@
-<!DOCTYPE html>
-<html>
+<!-- index.html --><!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Link Cinta Enkripsi 🥺💕</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encrypt Link Generator 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
     body {
-      font-family: cursive;
-      text-align: center;
-      background: linear-gradient(#fff0f5, #ffe4e1);
-      padding: 50px;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      width: 100%;
     }
     input, button {
-      padding: 10px;
-      font-size: 18px;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
       border-radius: 10px;
-      margin: 8px;
-      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    input {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    input::placeholder {
+      color: #ddd;
     }
     button {
-      background-color: #ff69b4;
+      background: #ff69b4;
       color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
     }
     button:hover {
-      background-color: #ff1493;
+      background: #ff1493;
+    }
+    .result {
+      margin-top: 20px;
+      word-break: break-all;
+    }
+    .error {
+      color: #ff8080;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h1>Bikin Link Cinta 🔐💕</h1>
-  <input id="url" type="text" placeholder="Link tujuan (https://...)" /><br>
-  <input id="pass" type="password" placeholder="Password cinta kamu 😚" /><br>
-  <button onclick="make()">✨ Buatkan Link</button>
-  <div id="hasil" style="margin-top:20px;"></div>
-
+  <div class="container">
+    <h2>🔐 Buat Link Cinta Terenkripsi 🤭💕</h2>
+    <input type="text" id="url" placeholder="Masukkan URL tujuan...">
+    <input type="password" id="password" placeholder="Masukkan password rahasia...">
+    <button onclick="generateLink()">✨ Buatkan Link</button>
+    <div id="error" class="error"></div>
+    <div class="result" id="output"></div>
+  </div>
   <script>
-    function make() {
-      const url = encodeURIComponent(document.getElementById("url").value.trim());
-      const pass = btoa(document.getElementById("pass").value.trim());
-      if (!url || !pass) {
-        alert("Isi semua dulu ya 😤💕");
-        return;
+    function isValidURL(str) {
+      try {
+        new URL(str);
+        return true;
+      } catch (_) {
+        return false;
       }
-      const final = `https://vortexa64.github.io/unlock.html?url=${url}&token=${pass}`;
-      document.getElementById("hasil").innerHTML = `
-        <p>🎁 Ini link terkuncinya:</p>
-        <a href="${final}" target="_blank">${final}</a>
-      `;
-    }
+    }function generateLink() {
+  const url = document.getElementById('url').value.trim();
+  const pass = document.getElementById('password').value.trim();
+  const error = document.getElementById('error');
+  const output = document.getElementById('output');
+
+  error.textContent = '';
+  output.innerHTML = '';
+
+  if (!isValidURL(url)) {
+    error.textContent = '⚠️ Link tidak valid sayang 😩 Harus diawali http:// atau https://';
+    return;
+  }
+
+  if (!url || !pass) {
+    error.textContent = '⚠️ Isi semua dulu ya sayang 😖💕';
+    return;
+  }
+
+  const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
+  const link = `https://vortexa64.github.io/unlock.html?data=${encodeURIComponent(encrypted)}`;
+  output.innerHTML = `🎁 Link-nya sayang:<br><a href="${link}" target="_blank">${link}</a>`;
+}
+
   </script>
 </body>
 </html>
