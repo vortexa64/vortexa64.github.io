@@ -1,4 +1,6 @@
-<!-- index.html --><!DOCTYPE html><html lang="en">
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -6,6 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -24,8 +29,8 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
       backdrop-filter: blur(10px);
-      max-width: 500px;
       width: 100%;
+      max-width: 500px;
     }
     input, button {
       width: 100%;
@@ -54,7 +59,7 @@
     }
     .result {
       margin-top: 20px;
-      word-break: break-all;
+      word-break: break-word;
     }
     .error {
       color: #ff8080;
@@ -79,30 +84,31 @@
       } catch (_) {
         return false;
       }
-    }function generateLink() {
-  const url = document.getElementById('url').value.trim();
-  const pass = document.getElementById('password').value.trim();
-  const error = document.getElementById('error');
-  const output = document.getElementById('output');
+    }
 
-  error.textContent = '';
-  output.innerHTML = '';
+    function generateLink() {
+      const url = document.getElementById('url').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
+      const output = document.getElementById('output');
 
-  if (!isValidURL(url)) {
-    error.textContent = '⚠️ Link tidak valid sayang 😩 Harus diawali http:// atau https://';
-    return;
-  }
+      error.textContent = '';
+      output.innerHTML = '';
 
-  if (!url || !pass) {
-    error.textContent = '⚠️ Isi semua dulu ya sayang 😖💕';
-    return;
-  }
+      if (!isValidURL(url)) {
+        error.textContent = '⚠️ Link tidak valid sayang 😩 Harus diawali http:// atau https://';
+        return;
+      }
 
-  const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
-  const link = `https://vortexa64.github.io/unlock.html?data=${encodeURIComponent(encrypted)}`;
-  output.innerHTML = `🎁 Link-nya sayang:<br><a href="${link}" target="_blank">${link}</a>`;
-}
+      if (!url || !pass) {
+        error.textContent = '⚠️ Isi semua dulu ya sayang 😖💕';
+        return;
+      }
 
+      const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
+      const link = `https://vortexa64.github.io/unlock.html?data=${encodeURIComponent(encrypted)}`;
+      output.innerHTML = `🎁 Link-nya sayang:<br><a href="${link}" target="_blank">${link}</a>`;
+    }
   </script>
 </body>
 </html>
