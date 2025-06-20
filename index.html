@@ -96,7 +96,7 @@
   }
 
   const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
-  const finalLink = `unlock.html?data=${encodeURIComponent(encrypted)}`;
+  const finalLink = `${window.location.origin}/unlock.html?data=${encodeURIComponent(encrypted)}`;
   output.innerHTML = `💌 Link kamu siap:<br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
 }
 
