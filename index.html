@@ -2,75 +2,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔐 Link Generator encrypt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <title>🔐 Encrypt My Link</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to right, #8360c3, #111111);
+      font-family: 'Inter', sans-serif;
+      background: #121212;
+      color: #f1f1f1;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-      color: #fff;
     }
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
+    .container {
+      background: #1e1e1e;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.1);
       width: 100%;
+      max-width: 480px;
+      animation: fadeIn 0.5s ease-in;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #00ffe5;
     }
     input, button {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
-      border: none;
+      margin: 8px 0;
       border-radius: 8px;
-      font-size: 16px;
+      border: none;
+      font-size: 15px;
     }
     input {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
+      background: #2a2a2a;
+      color: #fff;
     }
     input::placeholder {
-      color: #eee;
+      color: #aaa;
     }
     button {
-      background: #ff4081;
-      color: white;
+      background: #00ffe5;
+      color: #000;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
     button:hover {
-      background: #f50057;
+      background: #00bfa6;
     }
     .result {
-      margin-top: 15px;
+      margin-top: 16px;
       word-break: break-word;
+      display: none;
     }
-    .error {
-      color: #ffb6c1;
+    .copy-btn {
+      margin-top: 10px;
+      background: #444;
+      color: #fff;
       font-size: 14px;
+    }
+    .copy-btn:hover {
+      background: #666;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>✨buat kunci Link 🤭💕</h2>
-    <input type="text" id="url" placeholder="Masukkan URL tujuan...">
-    <input type="password" id="password" placeholder="Masukkan password...">
-    <button onclick="generateLink()">🔐 Buat Link Terenkripsi</button>
-    <div class="error" id="error"></div>
-    <div class="result" id="output"></div>
-  </div>
-  <script>
+  <div class="container">
+    <h2>🔐 Encrypt Your Link</h2>
+    <input type="text" id="url" placeholder="Enter your target URL here">
+    <input type="password" id="password" placeholder="Enter your secret password">
+    <button onclick="generateLink()">Generate Encrypted Link</button>
+    <div class="result" id="output">
+      <p id="linkResult"></p>
+      <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+    </div>
+    <div class="footer">© 2025 vortexa64.github.io</div>
+  </div>  <script>
     function isValidURL(str) {
       try {
         new URL(str);
@@ -78,27 +102,35 @@
       } catch (_) {
         return false;
       }
-    }function generateLink() {
-  const url = document.getElementById("url").value.trim();
-  const pass = document.getElementById("password").value.trim();
-  const error = document.getElementById("error");
-  const output = document.getElementById("output");
-  error.textContent = "";
-  output.innerHTML = "";
+    }
 
-  if (!url || !pass) {
-    error.textContent = "⚠️ Isi semua dulu ya sayang 😖💕";
-    return;
-  }
-  if (!isValidURL(url)) {
-    error.textContent = "⚠️ Link tidak valid, harus pakai http:// atau https://";
-    return;
-  }
+    function generateLink() {
+      const url = document.getElementById("url").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const output = document.getElementById("output");
+      const linkResult = document.getElementById("linkResult");
 
-  const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
-  const finalLink = `${window.location.origin}/unlock.html?data=${encodeURIComponent(encrypted)}`;
-  output.innerHTML = `🔗 your link:<br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
-}
+      if (!url || !pass) {
+        alert("Please fill in both fields.");
+        return;
+      }
+      if (!isValidURL(url)) {
+        alert("Invalid URL format. Must include http:// or https://");
+        return;
+      }
 
-  </script>
-</body>
+      const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
+      const finalLink = `${window.location.origin}/unlock.html?data=${encodeURIComponent(encrypted)}`;
+
+      linkResult.innerHTML = `<a href="${finalLink}" target="_blank">${finalLink}</a>`;
+      output.style.display = 'block';
+    }
+
+    function copyLink() {
+      const linkText = document.getElementById("linkResult").innerText;
+      navigator.clipboard.writeText(linkText).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
+  </script></body>
+</html>
