@@ -1,55 +1,57 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Buat Surat Cinta 💌</title>
+  <title>Generator Cinta 🤭💕</title>
   <style>
     body {
-      background: #fff0f5;
-      font-family: sans-serif;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(#fff0f5, #ffe4e1);
       text-align: center;
-      padding: 40px;
+      padding: 50px;
     }
-    h1 {
-      color: #d63384;
+    input, button {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin: 10px;
     }
-    input[type="text"] {
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid pink;
-      width: 250px;
-      text-align: center;
-    }
-    input[type="submit"] {
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 10px;
+    button {
       background-color: #ff69b4;
-      border: none;
       color: white;
-      font-weight: bold;
-      cursor: pointer;
     }
-    .form-box {
-      background: #ffffff;
-      display: inline-block;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255,182,193,0.5);
+    button:hover {
+      background-color: #ff1493;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
+  <h1>🔐 Buat Link Cinta yang Terkunci 💕</h1>
+  <input type="text" id="url" placeholder="Link rahasia 🤫" />
+  <input type="password" id="pass" placeholder="Password cinta 🥺💕" />
+  <br>
+  <button onclick="generate()">✨ Buat Link 💖</button>
+  <div id="output"></div>
 
-  <h1>💌 Buat Surat Cinta 💌</h1>
-  <p>Masukkan nama suratmu (tanpa .txt), misalnya: <b>putri_dari_arya</b></p>
-
-  <div class="form-box">
-    <form action="surat.html" method="get">
-      <input type="text" name="file" placeholder="contoh: putri_dari_arya" required><br><br>
-      <input type="submit" value="Lihat Surat 💖">
-    </form>
-  </div>
-
+  <script>
+    function generate() {
+      const url = encodeURIComponent(document.getElementById("url").value.trim());
+      const pass = encodeURIComponent(document.getElementById("pass").value.trim());
+      if (!url || !pass) {
+        alert("Isi dua-duanya ya sayang 🤭💕");
+        return;
+      }
+      const finalLink = `https://vortexa64.github.io/unlock.html?url=${url}&key=${pass}`;
+      document.getElementById("output").innerHTML = `
+        <p>🎁 Ini link terkuncinya sayang~:</p>
+        <a href="${finalLink}" target="_blank">${finalLink}</a>
+      `;
+    }
+  </script>
 </body>
 </html>
