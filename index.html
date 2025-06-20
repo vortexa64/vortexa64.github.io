@@ -1,79 +1,73 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="id">
+<!-- index.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Encrypt Link Generator 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>🔐 Link Generator Cinta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #8360c3, #2ebf91);
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      color: #fff;
       padding: 20px;
+      color: #fff;
     }
-    .container {
-      background: rgba(255, 255, 255, 0.05);
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 400px;
       width: 100%;
-      max-width: 500px;
     }
     input, button {
       width: 100%;
-      padding: 15px;
-      margin: 10px 0;
+      padding: 12px;
+      margin-top: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 16px;
     }
     input {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
     }
     input::placeholder {
-      color: #ddd;
+      color: #eee;
     }
     button {
-      background: #ff69b4;
+      background: #ff4081;
       color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      margin-top: 20px;
+      transition: background 0.3s;
     }
     button:hover {
-      background: #ff1493;
+      background: #f50057;
     }
     .result {
-      margin-top: 20px;
+      margin-top: 15px;
       word-break: break-word;
     }
     .error {
-      color: #ff8080;
+      color: #ffb6c1;
       font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>🔐 Buat Link Cinta Terenkripsi 🤭💕</h2>
+  <div class="card">
+    <h2>✨ Buat Link Cinta 🤭💕</h2>
     <input type="text" id="url" placeholder="Masukkan URL tujuan...">
-    <input type="password" id="password" placeholder="Masukkan password rahasia...">
-    <button onclick="generateLink()">✨ Buatkan Link</button>
-    <div id="error" class="error"></div>
+    <input type="password" id="password" placeholder="Masukkan password...">
+    <button onclick="generateLink()">🔐 Buat Link Terenkripsi</button>
+    <div class="error" id="error"></div>
     <div class="result" id="output"></div>
   </div>
   <script>
@@ -84,31 +78,26 @@
       } catch (_) {
         return false;
       }
-    }
+    }function generateLink() {
+  const url = document.getElementById("url").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const error = document.getElementById("error");
+  const output = document.getElementById("output");
+  error.textContent = "";
+  output.innerHTML = "";
 
-    function generateLink() {
-      const url = document.getElementById('url').value.trim();
-      const pass = document.getElementById('password').value.trim();
-      const error = document.getElementById('error');
-      const output = document.getElementById('output');
+  if (!url || !pass) {
+    error.textContent = "⚠️ Isi semua dulu ya sayang 😖💕";
+    return;
+  }
+  if (!isValidURL(url)) {
+    error.textContent = "⚠️ Link tidak valid, harus pakai http:// atau https://";
+    return;
+  }
 
-      error.textContent = '';
-      output.innerHTML = '';
+  const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
+  const finalLink = `unlock.html?data=${encodeURIComponent(encrypted)}`;
+  output.innerHTML = `💌 Link kamu siap:<br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
+}
 
-      if (!isValidURL(url)) {
-        error.textContent = '⚠️ Link tidak valid sayang 😩 Harus diawali http:// atau https://';
-        return;
-      }
-
-      if (!url || !pass) {
-        error.textContent = '⚠️ Isi semua dulu ya sayang 😖💕';
-        return;
-      }
-
-      const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
-      const link = `https://vortexa64.github.io/unlock.html?data=${encodeURIComponent(encrypted)}`;
-      output.innerHTML = `🎁 Link-nya sayang:<br><a href="${link}" target="_blank">${link}</a>`;
-    }
   </script>
-</body>
-</html>
