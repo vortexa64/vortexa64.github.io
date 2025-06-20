@@ -5,52 +5,51 @@
   <title>Buat Surat Cinta 💌</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(135deg, #ffe6f0, #fff0f5);
-      padding: 50px;
+      background: #fff0f5;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #d63384;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid pink;
+      width: 250px;
       text-align: center;
     }
-
-    input, textarea {
-      font-family: inherit;
-      font-size: 18px;
-      padding: 10px;
-      margin: 10px;
-      width: 80%;
-      border-radius: 15px;
-      border: 2px solid #ffb3d9;
-    }
-
-    button {
-      background-color: #ff66b2;
-      color: white;
+    input[type="submit"] {
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      background-color: #ff69b4;
       border: none;
-      padding: 12px 24px;
-      font-size: 20px;
-      border-radius: 25px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
+    }
+    .form-box {
+      background: #ffffff;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,182,193,0.5);
     }
   </style>
 </head>
 <body>
-  <h1>💌 Buat Surat Cinta Gemes 💕</h1>
-  <input type="text" id="to" placeholder="Untuk siapa? 😚"><br>
-  <input type="text" id="from" placeholder="Dari siapa? 😘"><br>
-  <textarea id="pesan" placeholder="Isi surat cintanya... 🥺💕"></textarea><br>
-  <button onclick="buatSurat()">Buat Surat 💖</button>
 
-  <script>
-    function buatSurat() {
-      const to = encodeURIComponent(document.getElementById('to').value);
-      const from = encodeURIComponent(document.getElementById('from').value);
-      const pesan = encodeURIComponent(document.getElementById('pesan').value);
+  <h1>💌 Buat Surat Cinta 💌</h1>
+  <p>Masukkan nama suratmu (tanpa .txt), misalnya: <b>putri_dari_arya</b></p>
 
-      if (to && from && pesan) {
-        window.location.href = `surat.html?to=${to}&from=${from}&pesan=${pesan}`;
-      } else {
-        alert("Isi semua yaa sayang 🥺💕");
-      }
-    }
-  </script>
+  <div class="form-box">
+    <form action="surat.html" method="get">
+      <input type="text" name="file" placeholder="contoh: putri_dari_arya" required><br><br>
+      <input type="submit" value="Lihat Surat 💖">
+    </form>
+  </div>
+
 </body>
 </html>
