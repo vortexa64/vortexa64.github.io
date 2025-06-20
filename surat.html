@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>💌 Surat Cinta Untukmu 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background: #ffb6c1;
+      border-radius: 15px;
+      animation: slideUp 2s ease-out forwards;
+      margin-bottom: 30px;
+    }
+
+    .paper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      opacity: 0;
+      animation: fadeIn 2s ease-out 2s forwards;
+    }
+
+    h2 {
+      color: #ff3399;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 30px;
+      animation: fall 5s linear infinite;
+      top: -50px;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope">
+    <div class="paper" id="suratIsi">
+      <h2>Untuk: <span id="tujuan"></span> 💞</h2>
+      <p id="pesan"></p>
+      <p style="margin-top: 20px;">- Dari <span id="pengirim"></span> 💖</p>
+    </div>
+  </div>
+
+  <script>
+    // Ambil data dari URL
+    const query = new URLSearchParams(window.location.search);
+    const to = query.get("to") || "Sayang";
+    const from = query.get("from") || "Aku";
+    const pesan = query.get("pesan") || "Aku cinta kamu selamanya 😚💕";
+
+    // Masukkan ke dalam surat
+    document.getElementById("tujuan").textContent = to;
+    document.getElementById("pengirim").textContent = from;
+    document.getElementById("pesan").textContent = decodeURIComponent(pesan);
+
+    // Bikin hati jatuh-jatuh
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  </script>
+</body>
+  </html>
