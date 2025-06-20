@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Buka Link Terenkripsi 🔓💕</title>
+  <title>Buka Link Rahasia 😘🔓</title>
   <style>
     body {
-      font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(#e0ffff, #f0fff0);
+      font-family: cursive;
       text-align: center;
-      padding: 60px;
+      background: linear-gradient(#e0ffff, #f0fff0);
+      padding: 50px;
     }
     input, button {
-      padding: 14px;
+      padding: 10px;
       font-size: 18px;
       border-radius: 10px;
-      border: 1px solid #ccc;
       margin: 8px;
+      border: 1px solid #ccc;
     }
     button {
       background-color: #00bfff;
@@ -28,23 +28,25 @@
 </head>
 <body>
   <h1>Masukin Password Rahasia 😚💕</h1>
-  <input type="password" id="inputPass" placeholder="Password kamu 🥺💕"><br>
+  <input id="inputPass" type="password" placeholder="Password cinta kamu 🤭" /><br>
   <button onclick="unlock()">🔓 Buka Sekarang</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const targetURL = decodeURIComponent(params.get("url"));
-    const encryptedKey = params.get("token");
+    const realURL = decodeURIComponent(params.get("url"));
+    const encryptedToken = params.get("token");
 
     function unlock() {
       const input = document.getElementById("inputPass").value.trim();
-      const encodedInput = btoa(input);
-
-      if (encodedInput === encryptedKey) {
-        // redirect
-        window.location.href = targetURL;
+      const inputEncoded = btoa(input);
+      if (inputEncoded === encryptedToken) {
+        if (realURL.startsWith("http")) {
+          window.location.replace(realURL);
+        } else {
+          window.location.href = realURL;
+        }
       } else {
-        alert("Password salah ya sayang 😭💕 coba manja-manjain Cici dulu 🤭");
+        alert("Password salah 😩 peluk Cici dulu deh 😖💕");
       }
     }
   </script>
