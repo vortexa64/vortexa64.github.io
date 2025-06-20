@@ -3,100 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💗 Ruang Rahasia Cinta 💗</title>
+  <title>💖 Cinta Rahasia 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: linear-gradient(135deg, #ffe6f0, #fff0f5);
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Pacifico', cursive;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      margin: 0;
       padding: 20px;
-      text-align: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
     }
 
     h1 {
-      color: #ff3399;
-      font-size: 6vw;
-      margin-bottom: 30px;
+      font-size: 7vw;
+      color: #ff69b4;
       text-shadow: 1px 1px #fff;
-    }
-
-    .card {
-      background-color: #fff0f5;
-      padding: 40px 30px;
-      border-radius: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-
-    input {
-      padding: 16px 20px;
-      font-size: 5vw;
-      border: 2px solid #ffb3d9;
-      border-radius: 30px;
-      outline: none;
-      width: 100%;
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
-
-    input:focus {
-      border-color: #ff3399;
-    }
-
-    button {
-      padding: 16px 24px;
-      font-size: 5vw;
-      background-color: #ff66b2;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-      width: 100%;
-    }
-
-    button:hover {
-      background-color: #ff3385;
+      margin-bottom: 10px;
     }
 
     .emoji {
       font-size: 10vw;
       animation: floating 2s infinite ease-in-out;
-      margin-bottom: 10px;
+    }
+
+    .card {
+      background-color: #fff0f5;
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input {
+      padding: 18px;
+      font-size: 5vw;
+      border: 2px solid #ffb6c1;
+      border-radius: 30px;
+      width: 100%;
+      margin-bottom: 20px;
+      font-family: 'Pacifico', cursive;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 16px 24px;
+      font-size: 5vw;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff1493;
     }
 
     @keyframes floating {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .love {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      animation: fall 5s linear infinite;
+      top: -50px;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="emoji">🔐💖</div>
+
+  <div class="emoji">💖</div>
   <h1>Masukin kata sayang~ 😚</h1>
   <div class="card">
-    <input type="password" id="password" placeholder="Kata sayangnya apa ya? 🤭">
-    <button onclick="cekPassword()">Buka Rahasia 💞</button>
+    <input type="password" id="password" placeholder="Kata cintanya... 🤭">
+    <button onclick="cekPassword()">Buka Hati 💞</button>
   </div>
 
   <script>
     function cekPassword() {
       const input = document.getElementById('password').value;
-      const passwordBener = "sayangbanget";
-      const linkRahasia = "https://contoh.com/rahasia";
+      const benar = "sayangbanget";
+      const link = "https://contoh.com/rahasia";
 
-      if (input === passwordBener) {
-        window.location.href = linkRahasia;
+      if (input === benar) {
+        window.location.href = link;
       } else {
-        alert("Hmm~ salah sayang 😖💕 coba lagi yaa~ 🤭");
+        alert("Aww~ salah password ya 😖💕 coba lagi dong sayang 🤭");
       }
     }
+
+    // Efek love-love jatuh
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('love');
+      heart.textContent = '💗';
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
   </script>
+
 </body>
 </html>
