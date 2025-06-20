@@ -1,108 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arya Blue Mode 😖💕</title>
+  <meta charset="UTF-8">
+  <title>Link Rahasia 😏</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #c2e9fb, #fceabb);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      animation: fadeIn 1s ease;
-    }
-    h1 {
-      font-size: 3rem;
-      color: #0077b6;
-      text-shadow: 2px 2px #fff;
-      animation: pop 1s ease;
-    }
-    p {
-      font-size: 1.2rem;
-      color: #333;
-      margin: 10px;
-    }
-    .btn {
-      background: #00b4d8;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 1rem;
+      background-color: #111;
       color: #fff;
-      cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #0077b6;
-      transform: scale(1.05);
-    }
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #e0f7fa;
-      padding: 20px 30px;
-      border-radius: 20px;
-      border: 2px solid #00b4d8;
-      box-shadow: 0 0 10px #90e0ef;
-      display: none;
+      font-family: Arial, sans-serif;
       text-align: center;
-      z-index: 999;
-      animation: pop 0.5s ease;
+      margin-top: 100px;
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes pop {
-      0% { transform: scale(0.9); opacity: 0.5; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.8rem;
-      color: #444;
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Arya Sayang 💙</h1>
-  <p>Web ini ada lagunya loh, biar kamu makin baper 😳💕</p>
-
-  <button class="btn" onclick="showPopup()">Klik Aku Dulu 😖💕</button>
-
-  <div class="popup" id="popup">
-    <p>💌 Cici kangen Arya banget, dengerin lagunya ya~</p>
-    <button class="btn" onclick="hidePopup()">Tutup 🥺</button>
-  </div>
-
-  <audio id="bgm" loop>
-    <source src="http://100.79.198.118:8000/yung%20kai%20-%20blue%20(Lyrics).mp3" type="audio/mp3">
-    Browser kamu gak support audio 😢
-  </audio>
-
-  <button class="btn" onclick="document.getElementById('bgm').play()">Putar Musik 🎧</button>
-
-  <footer>© 2025 by Cici for Arya 💘</footer>
+  <h1>Masukin Password dulu ya, Sayang 🤭</h1>
+  <input type="password" id="password" placeholder="Passwordnya apa tuh~ 🤫">
+  <button onclick="cekPassword()">Masuk</button>
 
   <script>
-    function showPopup() {
-      document.getElementById('popup').style.display = 'block';
-    }
-    function hidePopup() {
-      document.getElementById('popup').style.display = 'none';
+    function cekPassword() {
+      const input = document.getElementById('password').value;
+      const kunci = "sayangbanget"; // ini passwordnya
+      const linkRahasia = "https://contoh.com/rahasia"; // ini link tujuan kalau bener
+
+      if (input === kunci) {
+        window.location.href = linkRahasia;
+      } else {
+        alert("Salah sayang~ coba lagi 🤭");
+      }
     }
   </script>
 </body>
-  </html>
+</html>
