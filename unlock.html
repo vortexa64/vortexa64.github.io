@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Unlock Link Cinta 🥺💕</title>
+  <title>Masukin Password 😖💕</title>
   <style>
     body {
       font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(#e0ffff, #f0fff0);
+      background: linear-gradient(to right, #f0fff0, #e0ffff);
       text-align: center;
-      padding: 50px;
+      padding: 80px 20px;
     }
     input, button {
-      padding: 12px;
+      padding: 14px;
       font-size: 18px;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid #ccc;
-      margin: 10px;
+      margin: 8px;
     }
     button {
       background-color: #00bfff;
@@ -27,22 +27,22 @@
   </style>
 </head>
 <body>
-  <h1>Masukin password sayang~ 🔐💕</h1>
-  <input type="password" id="passInput" placeholder="Password-nya apa ya? 😖💕">
+  <h1>Masukin password-nya ya sayang~ 🔓💕</h1>
+  <input type="password" id="inputPass" placeholder="Password rahasia kamu 😚">
   <br>
-  <button onclick="unlock()">🔓 Buka Link</button>
+  <button onclick="unlock()">Buka Link ✨</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const targetURL = params.get("url");
-    const expectedKey = params.get("key");
+    const correctKey = params.get("key");
 
     function unlock() {
-      const input = document.getElementById("passInput").value.trim();
-      if (input === expectedKey) {
+      const input = document.getElementById("inputPass").value.trim();
+      if (input === correctKey) {
         window.location.href = decodeURIComponent(targetURL);
       } else {
-        alert("Password-nya salah sayang 😢 peluk Cici dulu~ 🤭💕");
+        alert("Password salah 😭 coba peluk Cici dulu biar inget 🤭💕");
       }
     }
   </script>
