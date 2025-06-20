@@ -2,14 +2,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔐 Link Generator Cinta</title>
+  <title>🔐 Link Generator encrypt</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to right, #8360c3, #2ebf91);
+      background: linear-gradient(to right, #8360c3, #111111);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -63,7 +63,7 @@
 </head>
 <body>
   <div class="card">
-    <h2>✨ Buat Link Cinta 🤭💕</h2>
+    <h2>✨buat kunci Link 🤭💕</h2>
     <input type="text" id="url" placeholder="Masukkan URL tujuan...">
     <input type="password" id="password" placeholder="Masukkan password...">
     <button onclick="generateLink()">🔐 Buat Link Terenkripsi</button>
@@ -97,7 +97,7 @@
 
   const encrypted = CryptoJS.AES.encrypt(url, pass).toString();
   const finalLink = `${window.location.origin}/unlock.html?data=${encodeURIComponent(encrypted)}`;
-  output.innerHTML = `💌 Link kamu siap:<br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
+  output.innerHTML = `🔗 your link:<br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
 }
 
   </script>
