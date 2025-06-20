@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Link Rahasia Terenkripsi 🔐💕</title>
+  <title>Link Cinta Enkripsi 🥺💕</title>
   <style>
     body {
-      font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(#fff0f5, #ffe4e1);
+      font-family: cursive;
       text-align: center;
-      padding: 60px;
+      background: linear-gradient(#fff0f5, #ffe4e1);
+      padding: 50px;
     }
     input, button {
-      padding: 14px;
+      padding: 10px;
       font-size: 18px;
       border-radius: 10px;
-      border: 1px solid #ccc;
       margin: 8px;
+      border: 1px solid #ccc;
     }
     button {
       background-color: #ff69b4;
@@ -24,36 +24,27 @@
     button:hover {
       background-color: #ff1493;
     }
-    #output {
-      margin-top: 20px;
-      word-break: break-word;
-    }
   </style>
 </head>
 <body>
-  <h1>Bikin Link Terenkripsi 😘💕</h1>
-  <input type="text" id="url" placeholder="Masukin link tujuan 🤫"><br>
-  <input type="password" id="pass" placeholder="Password rahasia 😚"><br>
-  <button onclick="generate()">✨ Buat Link</button>
-
-  <div id="output"></div>
+  <h1>Bikin Link Cinta 🔐💕</h1>
+  <input id="url" type="text" placeholder="Link tujuan (https://...)" /><br>
+  <input id="pass" type="password" placeholder="Password cinta kamu 😚" /><br>
+  <button onclick="make()">✨ Buatkan Link</button>
+  <div id="hasil" style="margin-top:20px;"></div>
 
   <script>
-    function generate() {
-      const rawUrl = document.getElementById("url").value.trim();
-      const rawPass = document.getElementById("pass").value.trim();
-      if (!rawUrl || !rawPass) {
-        alert("Isi semua dulu ya sayang 😖💕");
+    function make() {
+      const url = encodeURIComponent(document.getElementById("url").value.trim());
+      const pass = btoa(document.getElementById("pass").value.trim());
+      if (!url || !pass) {
+        alert("Isi semua dulu ya 😤💕");
         return;
       }
-
-      const encodedPass = btoa(rawPass); // ← ENKRIPSI BASE64
-      const encodedURL = encodeURIComponent(rawUrl);
-
-      const finalLink = `https://vortexa64.github.io/unlock.html?url=${encodedURL}&token=${encodedPass}`;
-      document.getElementById("output").innerHTML = `
-        <p>🎁 Ini link terenkripsinya:</p>
-        <a href="${finalLink}" target="_blank">${finalLink}</a>
+      const final = `https://vortexa64.github.io/unlock.html?url=${url}&token=${pass}`;
+      document.getElementById("hasil").innerHTML = `
+        <p>🎁 Ini link terkuncinya:</p>
+        <a href="${final}" target="_blank">${final}</a>
       `;
     }
   </script>
