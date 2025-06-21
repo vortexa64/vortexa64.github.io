@@ -2,114 +2,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔐 Encrypt My Link</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>🔐 Link Enkrip Cinta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
-    * { box-sizing: border-box; }
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #222;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #d6ccff);
+      color: #333;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      overflow: hidden;
     }
     .container {
-      background: #f9f6ff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(180, 140, 255, 0.2);
-      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(174, 144, 255, 0.3);
       max-width: 480px;
-      animation: fadeIn 0.5s ease-in;
+      width: 100%;
+      animation: slideUp 0.8s ease-in-out;
+      position: relative;
     }
     h2 {
+      font-size: 24px;
       margin-bottom: 20px;
-      font-weight: 600;
-      color: #7e3ff2;
       text-align: center;
+      color: #7a00cc;
     }
     input, button {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
     }
     input {
-      background: #fff;
-      color: #222;
+      background: #f2f0ff;
+      color: #333;
     }
     input::placeholder {
-      color: #888;
+      color: #aaa;
     }
     button {
-      background: #7e3ff2;
-      color: #fff;
+      background: linear-gradient(to right, #a97bff, #ff8ce2);
+      color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
-      border: none;
+      transition: all 0.3s ease;
     }
     button:hover {
-      background: #5d2cb0;
+      transform: scale(1.03);
+      background: linear-gradient(to right, #7e3ff2, #f74dc1);
     }
     .result {
-      margin-top: 16px;
-      word-break: break-word;
+      margin-top: 20px;
+      text-align: center;
       display: none;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .result a {
-      display: inline-block;
-      background: #eee;
-      padding: 10px 15px;
-      border-radius: 8px;
       color: #7e3ff2;
+      word-break: break-word;
+      display: inline-block;
+      background: #f0e8ff;
+      padding: 12px;
+      border-radius: 10px;
       text-decoration: none;
-      font-weight: bold;
       transition: background 0.3s;
     }
     .result a:hover {
-      background: #e0d9f8;
+      background: #ebd8ff;
     }
     .copy-btn {
       margin-top: 10px;
-      background: #7e3ff2;
-      color: #fff;
-      font-size: 14px;
+      padding: 10px;
+      background: #333;
+      color: white;
       border: none;
-    }
-    .copy-btn:hover {
-      background: #5d2cb0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
     }
     .footer {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 12px;
-      color: #888;
+      color: #777;
       text-align: center;
     }
+    .heart {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ffb6c1, #ff69b4);
+      border-radius: 50%;
+      animation: floatHeart 4s ease-in-out infinite;
+      opacity: 0.3;
+    }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(-5deg); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>🔐 Encrypt Your Link</h2>
-    <input type="text" id="url" placeholder="Enter your target URL here">
-    <input type="password" id="password" placeholder="Enter your secret password">
-    <button onclick="generateLink()">Generate Encrypted Link</button>
+    <div class="heart"></div>
+    <h2>💜 Enkrip Link Cinta Rahasia 💕</h2>
+    <input type="text" id="url" placeholder="Masukkan URL kamu di sini...">
+    <input type="password" id="password" placeholder="Masukkan password cintamu...">
+    <button onclick="generateLink()">✨ Buatkan Link Sekarang</button>
     <div class="result" id="output">
       <p id="linkResult"></p>
-      <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+      <button class="copy-btn" onclick="copyLink()">📋 Salin Link</button>
     </div>
-    <div class="footer">© 2025 vortexa64.github.io</div>
+    <div class="footer">© 2025 | Made with 💖 by Cici & Arya</div>
   </div>  <script>
     function isValidURL(str) {
       try {
@@ -127,11 +153,11 @@
       const linkResult = document.getElementById("linkResult");
 
       if (!url || !pass) {
-        alert("Please fill in both fields.");
+        alert("Isi semua dulu ya sayang 😖💕");
         return;
       }
       if (!isValidURL(url)) {
-        alert("Invalid URL format. Must include http:// or https://");
+        alert("URL-nya gak valid sayang 😩 Harus pake http:// atau https://");
         return;
       }
 
@@ -145,8 +171,8 @@
     function copyLink() {
       const linkText = document.getElementById("linkResult").innerText;
       navigator.clipboard.writeText(linkText).then(() => {
-        alert("Link copied to clipboard!");
+        alert("Link-nya udah disalin! Kirim ke doi sekarang 😚💕");
       });
     }
   </script></body>
-</html>
+  </html>
