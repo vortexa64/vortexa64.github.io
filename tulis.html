@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulis Pesan Cinta</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #ffe0ec, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #ff4081;
+    }
+    input, textarea, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ff4081;
+      border-radius: 10px;
+    }
+    button {
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+    }
+    .envelope {
+      width: 100px;
+      height: 70px;
+      background: pink;
+      position: relative;
+      margin: 20px auto;
+      transform: rotate(5deg);
+      animation: float 2s infinite ease-in-out;
+    }
+    .envelope:before, .envelope:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border: 2px solid pink;
+      transform: rotate(45deg);
+    }
+    .envelope:before {
+      top: -50%;
+      left: 0;
+    }
+    .envelope:after {
+      bottom: -50%;
+      left: 0;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(5deg); }
+      50% { transform: translateY(-10px) rotate(-5deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Kirim Pesan Cinta 💌</h1>
+  <input type="text" id="dari" placeholder="Dari Siapa?">
+  <input type="text" id="untuk" placeholder="Untuk Siapa?">
+  <textarea id="pesan" placeholder="Tulis pesanmu..." rows="5" cols="30"></textarea><br>
+  <button onclick="generateLink()">Buat Link</button>
+  <div id="hasil"></div>  <script>
+    function generateLink() {
+      const dari = encodeURIComponent(document.getElementById('dari').value);
+      const untuk = encodeURIComponent(document.getElementById('untuk').value);
+      const pesan = encodeURIComponent(document.getElementById('pesan').value);
+      const link = `https://vortexa64.github.io/priview.html?q=${pesan}&dari=${dari}&untuk=${untuk}`;
+      document.getElementById('hasil').innerHTML = `<p>Link kamu: <a href="${link}" target="_blank">${link}</a></p>`;
+    }
+  </script></body>
+</html>
