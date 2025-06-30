@@ -48,6 +48,8 @@
       animation: goyang 1.8s infinite ease-in-out;
       display: none;
       margin-top: 20px;
+      word-break: break-word;
+      white-space: pre-wrap;
     }
     @keyframes goyang {
       0%, 100% { transform: rotate(-2deg); }
@@ -107,9 +109,9 @@
     <h2 id="untuk">Untuk: 💖</h2>
     <p id="pesan"></p>
     <h3 id="dari">Dari: 💌</h3>
-  </div>  <audio id="lagu" autoplay loop>
-    <source src="https://github.com/vortexa64/vortexa64.github.io/raw/refs/heads/main/wikwokdetok.mp3" type="audio/mpeg" />
-  </audio>  <footer>© 2025 | by Arya / vortexa</footer>  <script>
+  </div><audio id="lagu" autoplay loop></audio>
+
+  <footer>© 2025 | by Arya / vortexa</footer>  <script>
     const urlParams = new URLSearchParams(window.location.search);
     const pesan = urlParams.get('q');
     const dari = urlParams.get('dari');
@@ -152,6 +154,7 @@
       loveTerbangTerus();
 
       const audio = document.getElementById("lagu");
+      audio.src = "https://github.com/vortexa64/vortexa64.github.io/raw/refs/heads/main/wikwokdetok.mp3";
       setTimeout(() => {
         audio.volume = 0.5;
         audio.play().catch(() => {});
@@ -178,4 +181,4 @@
 
     tampilkanGombalanAcak();
   </script></body>
-    </html>
+  </html>
