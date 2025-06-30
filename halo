@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arya Storage HTML</title>
+  <style>
+    body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+    .entry { margin-bottom: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Riwayat Data Tersimpan 🔐</h2>
+  <div id="log"></div>
+
+  <script>
+    const param = new URLSearchParams(location.search).get("q");
+    const logKey = "arya_data_log";
+
+    // Ambil data lama
+    let old = JSON.parse(localStorage.getItem(logKey) || "[]");
+
+    // Cek kalau ada data baru
+    if (param && !old.includes(param)) {
+      old.push(param);
+      localStorage.setItem(logKey, JSON.stringify(old));
+    }
+
+    // Tampilkan semua log
+    document.getElementById("log").innerHTML =
+      old.map(item => `<div class="entry">${item}</div>`).join("");
+  </script>
+</body>
+</html>
