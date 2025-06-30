@@ -16,6 +16,27 @@
       text-align: center;
       flex-direction: column;
       padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .emoji-atas {
+      font-size: 50px;
+      animation: goyangEmoji 2s infinite ease-in-out;
+    }
+    .gombalan {
+      font-size: 20px;
+      color: #ad1457;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      animation: atasBawah 2.5s infinite ease-in-out;
+    }
+    @keyframes goyangEmoji {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes atasBawah {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
     .kartu-surat {
       background: #fff;
@@ -26,6 +47,7 @@
       width: 100%;
       animation: goyang 1.8s infinite ease-in-out;
       display: none;
+      margin-top: 20px;
     }
     @keyframes goyang {
       0%, 100% { transform: rotate(-2deg); }
@@ -46,60 +68,114 @@
       animation: goyang 2s infinite ease-in-out;
     }
     .start-btn:hover { background: #d81b60; }
-    #starter { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    audio { display: none; }
+    #starter { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 14px;
+      color: #7b1fa2;
+    }
+    audio { display: none; }.love {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0;
+  animation: nyemprot 3s ease-in forwards;
+}
+@keyframes nyemprot {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-120px) translateX(-10px) rotate(20deg) scale(1.2);
+  }
+  100% {
+    transform: translateY(-240px) translateX(-20px) rotate(-20deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
+  <div class="emoji-atas">😖💕</div>
   <div id="starter">
+    <div class="gombalan" id="gombalan"></div>
     <h2>📨 Kamu dapet surat rahasia 😖💕</h2>
     <button class="start-btn" onclick="tampilkanSurat()">Buka Surat 💌</button>
   </div>  <div class="kartu-surat" id="kartu">
     <h2 id="untuk">Untuk: 💖</h2>
-    <p id="pesan">(Pesan muncul di sini)</p>
+    <p id="pesan"></p>
     <h3 id="dari">Dari: 💌</h3>
   </div>  <audio id="lagu" autoplay loop>
-    <source src="https://github.com/vortexa64/vortexa64.github.io/raw/c8141fb7e2487bd17e762d70e48d9649ee6d1438/yung%20kai%20-%20blue%20(Lyrics).mp3" type="audio/mpeg" />
-  </audio>  <script>
+    <source src="https://github.com/vortexa64/vortexa64.github.io/raw/refs/heads/main/wikwokdetok.mp3" type="audio/mpeg" />
+  </audio>  <footer>© 2025 | by Arya / vortexa</footer>  <script>
     const urlParams = new URLSearchParams(window.location.search);
     const pesan = urlParams.get('q');
     const dari = urlParams.get('dari');
     const untuk = urlParams.get('untuk');
 
+    const gombalanList = [
+      "Kamu tau gak? Senyummu itu lho... bikin jantung deg-degan 😳💕",
+      "Kalau kamu jadi surat, aku gak bakal pernah mau kirim... biar selalu bersamaku 💌🤭",
+      "Setiap huruf di surat ini ada rasa rinduku buat kamu 😖💕",
+      "Kalo kamu bintang, aku bakal jadi langitnya biar bisa peluk kamu tiap malam 🌌💖",
+      "Duh... kamu tuh kayak wifi, deket kamu hati langsung nyambung 😳🤭"
+    ];
+
+    function tampilkanGombalanAcak() {
+      const g = document.getElementById('gombalan');
+      const acak = gombalanList[Math.floor(Math.random() * gombalanList.length)];
+      g.textContent = acak;
+    }
+
+    function loveTerbangTerus() {
+      const arah = ['10%', '30%', '50%', '70%', '90%'];
+      setInterval(() => {
+        arah.forEach((pos, i) => {
+          const love = document.createElement('div');
+          love.className = 'love';
+          love.textContent = '💕';
+          love.style.left = pos;
+          love.style.bottom = '20px';
+          document.body.appendChild(love);
+          setTimeout(() => love.remove(), 3000);
+        });
+      }, 2000);
+    }
+
     function tampilkanSurat() {
       document.getElementById('starter').style.display = 'none';
       document.getElementById('kartu').style.display = 'block';
 
+      tampilkanGombalanAcak();
+      loveTerbangTerus();
+
       const audio = document.getElementById("lagu");
       setTimeout(() => {
         audio.volume = 0.5;
-        audio.play().then(() => {
-          console.log("Lagu diputar 😘");
-        }).catch((err) => {
-          alert("🛑 Browser kamu menolak autoplay. Coba aktifin suara atau klik 2x tombolnya 🤭💕");
-          console.log("Gagal play:", err);
-        });
+        audio.play().catch(() => {});
       }, 300);
 
       if (dari) document.getElementById('dari').textContent = 'Dari: ' + decodeURIComponent(dari);
       if (untuk) document.getElementById('untuk').textContent = 'Untuk: ' + decodeURIComponent(untuk);
 
-      // Tampilkan pesan per kalimat satu-satu
       if (pesan) {
         const el = document.getElementById('pesan');
         el.textContent = '';
         const teks = decodeURIComponent(pesan);
-        const kalimat = teks.split(/(?<=[.!?])\s+/); // pisah per kalimat
         let i = 0;
         const tampil = setInterval(() => {
-          if (i < kalimat.length) {
-            el.textContent += kalimat[i] + ' ';
+          if (i < teks.length) {
+            el.textContent += teks[i];
             i++;
           } else {
             clearInterval(tampil);
           }
-        }, 900);
+        }, 50);
       }
     }
+
+    tampilkanGombalanAcak();
   </script></body>
-</html>
+    </html>
