@@ -4,9 +4,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surat Cinta</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Arial Black', Gadget, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -15,76 +20,82 @@
       min-height: 100vh;
       overflow: hidden;
     }
-    .envelope-box {
-      animation: pulse 3s ease-in-out infinite;
-      padding: 20px 30px;
-      border-radius: 25px;
-      background: #fff;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
-      text-align: center;
-      z-index: 10;
+    .envelope {
+      width: 150px;
+      height: 100px;
+      background: #ffc0cb;
+      position: relative;
+      border-radius: 10px 10px 5px 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+    .envelope:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top left, #fff, #ffc0cb);
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+      border-radius: 10px 10px 0 0;
     }
-    .envelope-box h2 {
-      color: #ff69b4;
-      font-size: 28px;
+    .letter {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 8px;
+      transform: translateY(100%);
+      transition: transform 0.6s ease;
+      padding: 10px;
+      font-size: 16px;
+      overflow: auto;
+    }
+    .envelope.open .letter {
+      transform: translateY(0);
+    }
+    .letter h2, .letter h3, .letter p {
       margin-bottom: 10px;
-    }
-    .envelope-box p {
-      font-size: 20px;
-      margin: 15px 0;
-    }
-    .envelope-box h3 {
-      font-size: 18px;
+      text-align: center;
       color: #d63384;
     }
-    .floating {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.7;
-      animation: floatAnim linear infinite;
+    .tip {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
     }
-    @keyframes floatAnim {
-      0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-150px) rotate(360deg); }
+    @media screen and (max-width: 600px) {
+      .envelope {
+        width: 90%;
+        height: auto;
+      }
+      .letter {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="envelope-box">
-    <h2 id="untuk"></h2>
-    <p id="pesan"></p>
-    <h3>Dari: <span id="dari"></span></h3>
-  </div>  <script>
+  <div class="envelope" onclick="toggleOpen(this)">
+    <div class="letter">
+      <h2 id="untuk"></h2>
+      <p id="pesan"></p>
+      <h3>Dari: <span id="dari"></span></h3>
+    </div>
+  </div>
+  <div class="tip">💌 Ketuk amplop untuk membuka surat cinta 💕</div>  <script>
     const urlParams = new URLSearchParams(window.location.search);
     document.getElementById('pesan').textContent = decodeURIComponent(urlParams.get('q') || '');
     document.getElementById('dari').textContent = decodeURIComponent(urlParams.get('dari') || '');
     document.getElementById('untuk').textContent = 'Untuk: ' + decodeURIComponent(urlParams.get('untuk') || '');
 
-    const icons = [
-      'https://cdn-icons-png.flaticon.com/512/2589/2589175.png',
-      'https://cdn-icons-png.flaticon.com/512/3593/3593826.png',
-      'https://cdn-icons-png.flaticon.com/512/427/427735.png',
-      'https://cdn-icons-png.flaticon.com/512/1216/1216895.png'
-    ];
-
-    function createFloatingIcon() {
-      const icon = document.createElement('div');
-      icon.classList.add('floating');
-      icon.style.left = Math.random() * 100 + 'vw';
-      icon.style.animationDuration = (6 + Math.random() * 4) + 's';
-      icon.style.backgroundImage = `url(${icons[Math.floor(Math.random() * icons.length)]})`;
-      document.body.appendChild(icon);
-
-      setTimeout(() => icon.remove(), 10000);
+    function toggleOpen(el) {
+      el.classList.toggle('open');
     }
-
-    setInterval(createFloatingIcon, 500);
   </script></body>
-  </html>
+</html>
