@@ -4,98 +4,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surat Cinta</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
-      font-family: 'Arial Black', Gadget, sans-serif;
+      background-image: radial-gradient(circle at 10% 20%, rgba(255,192,203,0.3) 0%, transparent 70%),
+                        radial-gradient(circle at 80% 70%, rgba(255,182,193,0.3) 0%, transparent 70%),
+                        radial-gradient(circle at 50% 50%, rgba(255,160,180,0.2) 0%, transparent 60%);
+      font-family: 'Arial Black', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
       min-height: 100vh;
-      overflow: hidden;
+      padding: 20px;
     }
-    .envelope {
-      width: 150px;
-      height: 100px;
+    .amplop {
+      width: 90%;
+      max-width: 300px;
       background: #ffc0cb;
-      position: relative;
-      border-radius: 10px 10px 5px 5px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .envelope:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top left, #fff, #ffc0cb);
-      clip-path: polygon(0 0, 100% 0, 50% 60%);
-      border-radius: 10px 10px 0 0;
-    }
-    .letter {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      border-radius: 8px;
-      transform: translateY(100%);
-      transition: transform 0.6s ease;
-      padding: 10px;
-      font-size: 16px;
-      overflow: auto;
-    }
-    .envelope.open .letter {
-      transform: translateY(0);
-    }
-    .letter h2, .letter h3, .letter p {
-      margin-bottom: 10px;
+      transition: background 0.3s ease;
+      padding: 20px;
       text-align: center;
+    }
+    .amplop:hover {
+      background: #ffb6c1;
+    }
+    .surat {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+    .amplop.buka .surat {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 15px;
+    }
+    .surat h2, .surat p, .surat h3 {
+      margin: 10px 0;
       color: #d63384;
     }
     .tip {
-      margin-top: 20px;
       font-size: 14px;
       color: #555;
+      margin-top: 20px;
       text-align: center;
-    }
-    @media screen and (max-width: 600px) {
-      .envelope {
-        width: 90%;
-        height: auto;
-      }
-      .letter {
-        font-size: 14px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="envelope" onclick="toggleOpen(this)">
-    <div class="letter">
+  <div class="amplop" onclick="this.classList.toggle('buka')">
+    💌 Ketuk untuk membuka surat 💕
+    <div class="surat">
       <h2 id="untuk"></h2>
       <p id="pesan"></p>
       <h3>Dari: <span id="dari"></span></h3>
     </div>
   </div>
-  <div class="tip">💌 Ketuk amplop untuk membuka surat cinta 💕</div>  <script>
+  <div class="tip">Desain ringan dengan latar cinta yang manis 😖💕</div>  <script>
     const urlParams = new URLSearchParams(window.location.search);
     document.getElementById('pesan').textContent = decodeURIComponent(urlParams.get('q') || '');
     document.getElementById('dari').textContent = decodeURIComponent(urlParams.get('dari') || '');
     document.getElementById('untuk').textContent = 'Untuk: ' + decodeURIComponent(urlParams.get('untuk') || '');
-
-    function toggleOpen(el) {
-      el.classList.toggle('open');
-    }
   </script></body>
 </html>
