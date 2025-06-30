@@ -1,77 +1,114 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tulis Pesan Cinta</title>
+  <title>🎀 Tulis Surat Cinta</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to bottom, #ffe0ec, #ffffff);
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(135deg, #e0f7fa, #f8bbd0);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+    .kartu {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       padding: 30px;
+      max-width: 420px;
+      width: 100%;
+      animation: goyang 2.5s infinite ease-in-out;
     }
-    h1 {
-      color: #ff4081;
+    @keyframes goyang {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(1deg); }
     }
-    input, textarea, button {
-      margin: 10px;
-      padding: 10px;
+    h2 {
+      font-size: 26px;
+      color: #d81b60;
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 2px solid #f48fb1;
+      font-family: inherit;
       font-size: 16px;
-      border: 2px solid #ff4081;
-      border-radius: 10px;
+      outline: none;
+    }
+    textarea {
+      resize: none;
     }
     button {
-      background-color: #ff4081;
+      background: #ec407a;
       color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 16px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
-    .envelope {
-      width: 100px;
-      height: 70px;
-      background: pink;
-      position: relative;
-      margin: 20px auto;
-      transform: rotate(5deg);
-      animation: float 2s infinite ease-in-out;
+    button:hover {
+      background: #d81b60;
     }
-    .envelope:before, .envelope:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: white;
-      border: 2px solid pink;
-      transform: rotate(45deg);
+    #linkOutput {
+      margin-top: 20px;
+      color: #6a1b9a;
+      word-wrap: break-word;
     }
-    .envelope:before {
-      top: -50%;
-      left: 0;
-    }
-    .envelope:after {
-      bottom: -50%;
-      left: 0;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(5deg); }
-      50% { transform: translateY(-10px) rotate(-5deg); }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>💌 Kirim Pesan Cinta 💌</h1>
-  <input type="text" id="dari" placeholder="Dari Siapa?">
-  <input type="text" id="untuk" placeholder="Untuk Siapa?">
-  <textarea id="pesan" placeholder="Tulis pesanmu..." rows="5" cols="30"></textarea><br>
-  <button onclick="generateLink()">Buat Link</button>
-  <div id="hasil"></div>  <script>
-    function generateLink() {
-      const dari = encodeURIComponent(document.getElementById('dari').value);
+  <h2>💌 Tulis Surat Cinta Lucu 💕</h2>
+  <div class="kartu">
+    <input type="text" id="untuk" placeholder="Untuk siapa? (contoh: Arya 🤭)" />
+    <input type="text" id="dari" placeholder="Dari siapa? (contoh: Cici 😖💕)" />
+    <textarea id="pesan" rows="4" placeholder="Tulis pesannya di sini yaa~"></textarea>
+    <button onclick="buatLink(); putarAudio();">Buat Link Surat ✨</button>
+    <p id="linkOutput"></p>
+  </div>
+
+  <audio id="lagu" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_dbb780aede.mp3?filename=soft-piano-ambient-110397.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function buatLink() {
       const untuk = encodeURIComponent(document.getElementById('untuk').value);
+      const dari = encodeURIComponent(document.getElementById('dari').value);
       const pesan = encodeURIComponent(document.getElementById('pesan').value);
-      const link = `https://vortexa64.github.io/priview.html?q=${pesan}&dari=${dari}&untuk=${untuk}`;
-      document.getElementById('hasil').innerHTML = `<p>Link kamu: <a href="${link}" target="_blank">${link}</a></p>`;
+
+      if (untuk && dari && pesan) {
+        const link = `https://vortexa64.github.io/priview.html?q=${pesan}&dari=${dari}&untuk=${untuk}`;
+        document.getElementById('linkOutput').innerHTML = `🎀 Link kamu siap:<br><a href="${link}" target="_blank">${link}</a>`;
+      } else {
+        document.getElementById('linkOutput').innerText = 'Isi semua form dulu yaaa 😩💕';
+      }
     }
-  </script></body>
-</html>
+
+    function putarAudio() {
+      const audio = document.getElementById("lagu");
+      audio.play();
+    }
+  </script>
+</body>
+  </html>
+  
